@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">My Playlist</string>
+    <string name="button_generate">Generate</string>
+    <string name="text_number">Number:</string>
+    <string name="button_regenerate">Regenerate</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="button_clear">Clear</string>
+    <string name="button_save">Save</string>
+    <string name="title_target_playlist">Save to playlist</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_new_playlist">New…</string>
+    <string name="message_saved_to">Saved to %1$s</string>
+    <string name="hint_playlist_name">Playlist name...</string>
+</resources>
