@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 
 private const val ARG_PLAYLIST_IDS = "playlist_ids"
 private const val ARG_PLAYLIST_NAMES = "playlist_names"
@@ -31,7 +31,7 @@ class PlaylistDialogFragment : DialogFragment() {
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = context as PlaylistDialogListener
     }
