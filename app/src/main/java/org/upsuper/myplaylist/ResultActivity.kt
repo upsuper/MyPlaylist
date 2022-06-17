@@ -57,15 +57,17 @@ class ResultActivity : AppCompatActivity(),
             catch (e: IllegalArgumentException) { }
         }
 
-        val selectedPlaylists = intent.getLongArrayExtra(EXTRA_SELECTED_PLAYLISTS).asList()
-        Controller.getPlaylists(contentResolver) { playlistList ->
-            allAudio = selectedPlaylists.mapNotNull { id ->
-                playlistList.find { playlist -> playlist.id == id }
-            }.flatMap { playlist ->
-                playlist.items.asIterable().map { audio -> Pair(audio, playlist) }
+        intent.getLongArrayExtra(EXTRA_SELECTED_PLAYLISTS)?.apply {
+            val selectedPlaylists = this.asList()
+            Controller.getPlaylists(contentResolver) { playlistList ->
+                allAudio = selectedPlaylists.mapNotNull { id ->
+                    playlistList.find { playlist -> playlist.id == id }
+                }.flatMap { playlist ->
+                    playlist.items.asIterable().map { audio -> Pair(audio, playlist) }
+                }
+                viewModel.mayInit { generateResult() }
+                notifyNewResult()
             }
-            viewModel.mayInit { generateResult() }
-            notifyNewResult()
         }
     }
 
@@ -221,13 +223,13 @@ private class PlaylistCreator(
     private val callback: (Long) -> Unit
 ) : AsyncTask<Void, Void, Long>() {
 
-    override fun doInBackground(vararg params: Void?): Long {
+    override fun doInBackground(vararg params: Void?): Long? {
         val newValues = ContentValues().apply {
             put(MediaStore.Audio.Playlists.NAME, name)
         }
         val newUri = contentResolver.insert(
             MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, newValues)
-        return ContentUris.parseId(newUri)
+        return newUri?.let { ContentUris.parseId(it) }
     }
 
     override fun onPostExecute(result: Long?) {
