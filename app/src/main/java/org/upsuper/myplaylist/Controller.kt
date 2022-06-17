@@ -130,7 +130,7 @@ private class PlaylistSaver(
             val newValues = ContentValues().apply {
                 put(MediaStore.Audio.Playlists.Members.PLAYLIST_ID, playlistId)
                 put(MediaStore.Audio.Playlists.Members.AUDIO_ID, audioId)
-                put(MediaStore.Audio.Playlists.Members.PLAY_ORDER, index)
+                put(MediaStore.Audio.Playlists.Members.PLAY_ORDER, index + 1)
             }
             contentResolver.insert(playlistUri, newValues)
         }
