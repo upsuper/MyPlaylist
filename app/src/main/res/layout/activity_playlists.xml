@@ -40,7 +40,7 @@
         android:ems="10"
         android:gravity="end"
         android:inputType="number"
-        android:text="6"
+        android:text="10"
         app:layout_constraintBottom_toTopOf="@+id/generateButton"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="HardcodedText" />
